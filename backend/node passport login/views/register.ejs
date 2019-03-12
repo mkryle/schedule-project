@@ -1,0 +1,5 @@
+<form action="users/register" method="POST">
+    <label for="name">Name</label>
+    <!-- if name isn't undefined display it in the view -->
+    <input type="name" id="name" placeholder="Enter your name" value="<%= typeof name != 'undefined' ? name : '' %>">
+</form>

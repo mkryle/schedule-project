@@ -1,0 +1,5 @@
+<form action="users/login" method="POST">
+    <label for="email">Email</label>
+    <!-- if name isn't undefined display it in the view -->
+    <input type="email" id="email" placeholder="Enter your email" value="<%= typeof name != 'undefined' ? email : '' %>">
+</form>
