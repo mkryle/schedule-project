@@ -3,6 +3,8 @@ const app = express()
 const bodyParser = require('body-parser')
 const sqlite = require('sqlite')
 
+const hiddenSalt = '123456789'
+
 app.use(bodyParser.json())
 
 let database
@@ -18,10 +20,11 @@ app.get('/', (request, response) => {
 })
 
 app.post('/', (request, response) => {
-
     if (request.body.name && request.body.password) {
-        database.run('INSERT INTO logins VALUES (?,?)',
-            [request.body.name, request.body.password])
+        const userSalt = generateUserSalt(request.body.name)
+        const hashedPassword = hashPassword(request.body.password, userSalt)
+        database.run('INSERT INTO logins VALUES (?,?,?',
+            [request.body.name, hashedPassword, userSalt])
         response.status(201)
         response.send('Account Created')
 
@@ -57,5 +60,14 @@ app.delete('/:user', (request, response) => {
         response.send('No Account Found')
     }
 })
+
+function hashPassword(password, salt) {
+    //hash(salt, password, hiddenSalt)
+}
+
+function generateUserSalt(username) {
+    const unix = +new Date()
+    //hash(username + unix)
+}
 
 app.listen(3000)
