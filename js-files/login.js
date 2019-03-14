@@ -39,9 +39,9 @@ app.put('/:editUser', (request, response) => {
             [request.body.name, request.body.password, request.params.editUser])
         .then(() => {
             database.all('SELECT * FROM logins').then(logins => {
-                response.send(logins)
-            })
-            response.status(201)
+                    response.send(logins)
+                }) +
+                response.status(201)
             response.send('Your Profile Has Been Edited')
         })
 })
