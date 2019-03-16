@@ -1,20 +1,36 @@
 {
   "name": "schedule-project",
   "version": "1.0.0",
-  "description": "\"it is what it is\"",
-  "main": "index.js",
+  "description": "Project Grupp arbete",
+  "main": "project-main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "bulma": "^0.7.4",
     "express": "^4.16.4",
+    "jimp": "^0.6.0",
+    "minimist": "^1.2.0",
     "moment": "^2.24.0",
+    "process.argv": "^0.1.0",
     "sqlite": "^3.0.2",
-    "vue": "^2.6.8"
+    "uuid": "^3.3.2",
+    "vue": "^2.6.8",
+    "vue-route-timeline": "^0.2.2",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0",
+    "vuex-store": "^1.0.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.2",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.15.1",
+    "eslint-plugin-vue": "^5.2.2",
+    "vue-loader": "^15.7.0",
+    "vue-template-compiler": "^2.6.8",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   }

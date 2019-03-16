@@ -1,14 +1,28 @@
 // main app file
 
 <template>
-       <div><adminPage></adminPage></div>
-   </template>
-<script>
-  import adminPage from './components/adminPage.vue'
+<div id="app">
+  <div class="level-item ">
+    <p class="subtitle">
+      <strong>Schedule Project</strong>
+    </p>
+  </div>
+<router-view></router-view>
+</div>
+</template>
 
-  export default {
+<script>
+
+
+export default{
+    data(){
+      return{
+        admin: 'admin menu',
+        user: 'user Menu'
+      }
+    },
     components: {
-      adminPage
+
     }
-  }
+}
 </script>

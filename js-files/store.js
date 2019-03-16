@@ -6,6 +6,10 @@ const store = new Vuex.Store({
   state: {
     title: 'Admin Page'
   },
+  modules: {
+  user,
+  admin
+},
   mutations: {},
   actions: {},
   getters: {
