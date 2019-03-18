@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const sqlite = require('sqlite')
-const sha512 = require('sha512')
+const sha512 = require('js-sha512')
 
 const hiddenSalt = '123456789'
 
@@ -39,7 +39,7 @@ app.post('/', (request, response) => {
             })
     } else {
         response.status(400)
-        response.send('Incorrect parameters')
+        response.send('Incorrect Parameters')
     }
 })
 
@@ -63,7 +63,6 @@ app.delete('/:user', (request, response) => {
         response.status(201)
         response.send('Account Deleted')
 
-
     } else {
         response.status(400)
         response.send('No Account Found')
@@ -72,13 +71,15 @@ app.delete('/:user', (request, response) => {
 
 function hashPassword(password, salt) {
     hash = salt + password + hiddenSalt
-    return sha512(hash).toString('hex')
+    console.log(hash)
+    return sha512(hash)
 }
 
 function generateUserSalt(username) {
     const unix = +new Date()
     salt = username + unix
-    return sha512(salt).toString('hex')
+    console.log(salt)
+    return sha512(salt)
 }
 console.log('Listening on port 3000')
 app.listen(3000)

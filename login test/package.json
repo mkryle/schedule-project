@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
+    "js-sha512": "^0.8.0",
     "sha512": "0.0.1",
     "sqlite": "^3.0.2"
   }
