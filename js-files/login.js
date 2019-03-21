@@ -10,7 +10,7 @@ app.use(bodyParser.json())
 
 let database
 
-sqlite.open('users.sqlite').then(database_ => {
+sqlite.open('../backend/databases/users.sqlite').then(database_ => {
     database = database_
 })
 
