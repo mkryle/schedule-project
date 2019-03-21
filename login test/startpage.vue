@@ -1,5 +1,20 @@
 <template>
-<div>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>King Savage</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    >
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
+  </head>
+
+  <body>
     <section class="hero is-fullheight is-dark is-bold">
       <div class="hero-body">
         <div class="container">
@@ -47,27 +62,16 @@
         </div>
       </div>
     </section>
-<<<<<<< HEAD
-</div>
-</template>
-
-<script>
-import frontend from '../frontend';
-=======
   </body>
 </html>
 </template>
 
 <script>
 import frontend from "./frontend";
->>>>>>> 6f4b37027559a803b3a0ce2ecf028a42d6313fce
 export default {};
 </script>
 
 <style>
 </style>
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 6f4b37027559a803b3a0ce2ecf028a42d6313fce

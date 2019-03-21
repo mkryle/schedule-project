@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 //läser in skit
 const express = require('express')
 const app = express()
@@ -6,8 +5,14 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const path = require('path')
 const sqlite = require('sqlite')
+const uuidv4 = require('uuidv4')
 app.use(express.static(path.join(path.resolve(), 'public')))
-
+app.use(function (request, result, next) {
+    result.header('Access-Control-Allow-Origin', '*');
+    result.header('Access-Control-Allow-Headers', 'Content-Type');
+    result.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+});
 
 //skapa databas
 let database
@@ -18,7 +23,12 @@ sqlite.open('database/schema.sqlite').then(database_ => {
     database = database_
 }) // Open DB end 
 
-
+app.use(function (request, result, next) {
+    result.header('Access-Control-Allow-Origin', '*');
+    result.header('Access-Control-Allow-Headers', 'Content-Type');
+    result.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+});
 //get all
 app.get('/', (request, response) => {
     database.all('SELECT * FROM schema').then(schema => {
@@ -72,7 +82,7 @@ app.get('/createdby/:createdBy', (request, response) => {
 //post för att lägga till i schemat
 app.post('/', (request, response) => {
     database.run('INSERT INTO schema VALUES (?,?,?,?,?,?,?,?,?,?)',
-        [request.body.date, request.body.startTime, request.body.endTime, request.body.topName, request.body.subName, request.body.altSubName, request.body.eventName, request.body.createdBy, request.body.privateLink, request.body.id]
+        [request.body.date, request.body.startTime, request.body.endTime, request.body.topName, request.body.subName, request.body.altSubName, request.body.eventName, request.body.createdBy, request.body.privateLink, uuidv4()]
     ).then(() => {
         database.all('SELECT * FROM schema').then(schema => {
             response.send(schema)
