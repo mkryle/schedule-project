@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const sqlite = require('sqlite')
+const sha512 = require('js-sha512')
 
 const hiddenSalt = '123456789'
 
@@ -23,14 +24,22 @@ app.post('/', (request, response) => {
     if (request.body.name && request.body.password) {
         const userSalt = generateUserSalt(request.body.name)
         const hashedPassword = hashPassword(request.body.password, userSalt)
-        database.run('INSERT INTO logins VALUES (?,?,?',
-            [request.body.name, hashedPassword, userSalt])
-        response.status(201)
-        response.send('Account Created')
-
+        database.run('INSERT INTO logins VALUES (?,?,?)', [request.body.name, hashedPassword, userSalt])
+            .then(res => {
+                console.log(res)
+                response.status(201)
+                response.send('Account Created')
+            }).catch(err => {
+                console.log(`Name: ${request.body.name}`)
+                console.log(`Usersalt: ${userSalt}`)
+                console.log(`Password: ${hashedPassword}`)
+                console.log(`Error: ${err}`)
+                response.status(400)
+                response.send('Account Creation Failed')
+            })
     } else {
         response.status(400)
-        response.send('Account Creation Failed')
+        response.send('Incorrect Parameters')
     }
 })
 
@@ -39,9 +48,9 @@ app.put('/:editUser', (request, response) => {
             [request.body.name, request.body.password, request.params.editUser])
         .then(() => {
             database.all('SELECT * FROM logins').then(logins => {
-                    response.send(logins)
-                }) +
-                response.status(201)
+                response.send(logins)
+            })
+            response.status(201)
             response.send('Your Profile Has Been Edited')
         })
 })
@@ -54,7 +63,6 @@ app.delete('/:user', (request, response) => {
         response.status(201)
         response.send('Account Deleted')
 
-
     } else {
         response.status(400)
         response.send('No Account Found')
@@ -62,12 +70,16 @@ app.delete('/:user', (request, response) => {
 })
 
 function hashPassword(password, salt) {
-    //hash(salt, password, hiddenSalt)
+    hash = salt + password + hiddenSalt
+    console.log(hash)
+    return sha512(hash)
 }
 
 function generateUserSalt(username) {
     const unix = +new Date()
-    //hash(username + unix)
+    salt = username + unix
+    console.log(salt)
+    return sha512(salt)
 }
-
+console.log('Listening on port 3000')
 app.listen(3000)
