@@ -1,8 +1,7 @@
 <template>
     <div>
+<calendarnew />
         <div class="notification is-danger ">
-
-
         <div class="field is-horizontal">
           <div class="field-label">
             <label class="title is-white">Vecka 11:</label>
@@ -23,20 +22,17 @@
   </div>
 
 
+  <div class="tile is-child notification is-light" v-for="(day, index) in weekday" :key="day.day">
+    <div class="has-text-centered">
+      <p class="title">{{ day }}</p>
+      <p class="subtitle">{{ date }}</p>
+    </div>
 
-
-
-
-<div class="column is-12">
-<div class="tile is-child notification is-light">
-  <div class="has-text-centered">
-    <p class="title">Måndag</p>
-    <p class="subtitle">11 Mars 2019</p>
-  </div>
-</div>
-<article class="message ">
+<div class="column is-12" v-for="schedule in events"
+:key="schedule.day">
+<article class="message">
 <div class="message-header">
-  <p>06:00 - 17:00</p>
+  <p>{{ schedule.startTime }} - {{ schedule.endTime }} </p>
   <button class="delete" aria-label="delete"></button>
 </div>
 <div class="message-body is-dark" style="background-color: white; border: 1px solid #363636;">
@@ -53,10 +49,10 @@
 </thead>
     <tbody>
       <tr>
-        <td>Jon</td>
-        <td>Firewall</td>
-        <td>JavaScript</td>
-        <td> <a href="#"> WEBB18</a> </td>
+        <td>{{ schedule.teacher }}</td>
+        <td>{{ schedule.rom }}</td>
+        <td>{{ schedule.subject }}</td>
+        <td> <a href="#"> {{ schedule.courseGroup }}</a> </td>
         <td>
         <div class="tags are-large is-centered">
         <a href="#"><span class="tag is-success">Status</span></a>
@@ -67,36 +63,48 @@
     </tbody>
   </table>
 </div>
-<a class="button is-small is-primary">Add Event</a>
-</article>
-</div>
-<div class="column is-12">
-<div class="tile is-child notification is-light">
-  <div class="has-text-centered">
-    <p class="title">Tisdag</p>
-    <p class="subtitle">12 Mars 2019</p>
-  </div>
-</div>
-<article class="message">
-
-<div class="message-body">
-  <div class="notification is-white">
-    its empty
-  </div>
-</div>
-<a class="button is-small is-primary">Add Event</a>
+<a class="button is-small is-primary" href="#/admin/adminName/addNewEvent">Add Event</a>
 </article>
 </div>
 
+</div>
 </div>
 
 </template>
 <script>
+import Calendarnew from '../calander.vue'
+
+var moment = require('moment');
+
+moment.locale('sv');
+console.log(moment.weekdays(24));
     export default{
         data(){
           return{
-            msg: 'this is admin home pagesssssssssssss'
+            msg: 'this is admin home pagesssssssssssss',
+            days: moment.weekdays(),
+            weekDaysList: [],
+
           }
-        }
+        },  components: {
+    Calendarnew
+  },
+        computed: {
+            events() {
+              return this.$store.getters['getItems'];
+            },
+            weekday(){
+              for (var i = 0; i < this.events.length; i++) {
+
+                if (this.events[i].day = this.days[i]) {
+
+                  this.weekDaysList.push({date:this.days[i],items:[this.events[i].day]})
+                }
+
+              }
+              console.log(this.weekDaysList);
+              return this.days
+            }
+          },
     }
 </script>

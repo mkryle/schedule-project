@@ -1,24 +1,14 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-Vue.use(Vuex)
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-const store = new Vuex.Store({
-  state: {
-    title: 'Admin Page'
-  },
+import user from './components/user/store';
+import admin from './components/admin/store';
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
   modules: {
-  user,
-  admin
-},
-  mutations: {},
-  actions: {},
-  getters: {
-    title(){
-      return store.getters.title
-    },
-
-
+    user,
+    admin,
   }
-})
-
-export default store
+});

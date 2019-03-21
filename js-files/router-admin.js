@@ -4,6 +4,7 @@ import AdminHome from './components/admin/adminHome.vue';
 import Profile from './components/admin/adminProfilePage.vue';
 import Students from './components/admin/adminStudentsPage.vue';
 import AdminListEvents from './components/admin/adminListEvents.vue';
+import addNewEvent from './components/admin/addNewEvent.vue';
 
 
 
@@ -24,6 +25,10 @@ export default [
                       path: '/admin/:id/students',
                       name: 'admin-students',
                       component: Students,
+                    },{
+                      path: '/admin/:id/addNewEvent',
+                      name: 'admin-add',
+                      component: addNewEvent,
                     }]
       }
     ]

@@ -2,36 +2,62 @@
   "name": "schedule-project",
   "version": "1.0.0",
   "description": "Project Grupp arbete",
-  "main": "project-main.js",
+  "author": "",
   "scripts": {
     "start": "webpack --watch"
   },
-  "author": "",
-  "license": "ISC",
+  "main": "project-main.js",
   "dependencies": {
+    "@syncfusion/ej2-vue-schedule": "^16.4.55",
     "body-parser": "^1.18.3",
     "bulma": "^0.7.4",
+    "dayspan-vuetify": "^0.4.0",
     "express": "^4.16.4",
     "jimp": "^0.6.0",
     "minimist": "^1.2.0",
     "moment": "^2.24.0",
     "process.argv": "^0.1.0",
+    "quasar-extras": "^2.0.4",
+    "quasar-framework": "^0.17.20",
     "sqlite": "^3.0.2",
     "uuid": "^3.3.2",
+    "uuidv4": "^3.0.1",
     "vue": "^2.6.8",
+    "vue-full-calendar": "^2.7.0",
+    "vue-fullcalendar": "^1.0.9",
     "vue-route-timeline": "^0.2.2",
     "vue-router": "^3.0.2",
+    "vue-schedule": "^2.0.4",
     "vuex": "^3.1.0",
     "vuex-store": "^1.0.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.7.2",
+    "babel-plugin-transform-imports": "1.5.0",
     "css-loader": "^2.1.0",
     "eslint": "^5.15.1",
     "eslint-plugin-vue": "^5.2.2",
+    "quasar-calendar": "^0.3.4",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-quasar": "^0.17.1",
     "vue-loader": "^15.7.0",
     "vue-template-compiler": "^2.6.8",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
+  },
+  "license": "ISC",
+  "babel": {
+    "plugins": [
+      [
+        "transform-imports",
+        {
+          "quasar": {
+            "transform": "quasar-framework/dist/babel-transforms/imports.ios.js",
+            "preventFullImport": true
+          }
+        }
+      ]
+    ]
   }
 }

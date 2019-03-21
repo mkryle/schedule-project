@@ -1,8 +1,6 @@
 <template>
     <div>
         <div class="notification is-danger ">
-
-
         <div class="field is-horizontal">
           <div class="field-label">
             <label class="title is-white">Vecka 11:</label>
@@ -21,11 +19,6 @@
           </div>
         </div>
   </div>
-
-
-
-
-
 
 <div class="column is-12">
 <div class="tile is-child notification is-light">
