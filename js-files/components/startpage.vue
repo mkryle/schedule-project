@@ -47,27 +47,16 @@
         </div>
       </div>
     </section>
-<<<<<<< HEAD
-</div>
-</template>
-
-<script>
-import frontend from '../frontend';
-=======
   </body>
 </html>
 </template>
 
 <script>
 import frontend from "./frontend";
->>>>>>> 6f4b37027559a803b3a0ce2ecf028a42d6313fce
 export default {};
 </script>
 
 <style>
 </style>
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 6f4b37027559a803b3a0ce2ecf028a42d6313fce
