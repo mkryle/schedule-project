@@ -1,4 +1,3 @@
-
 // import store from './store'
 
 // import VueRouteTimeline from 'vue-route-timeline';
@@ -8,17 +7,16 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import router from './router'
 import store from './store'
+import moment from './moment'
 // import FullCalendar from 'vue-full-calendar'
 import 'bulma/css/bulma.css'
+
+
+console.log(moment().format('YYYY-MM-DD'))
 
 Vue.use(VueRouter);
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 6f4b37027559a803b3a0ce2ecf028a42d6313fce
 new Vue({
   created() {
 
