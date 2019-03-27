@@ -88,7 +88,7 @@ new Vue({
         this.week.saDay = moment().add(4, "days").format('YYYY-MM-DD')
         this.week.suDay = moment().add(5, "days").format('YYYY-MM-DD')
 
-      } else if (whatDay === 'Wensday') {
+      } else if (whatDay === 'Wednesday') {
         this.week.tuDay = moment().subtract(1, "days").format('YYYY-MM-DD')
         this.week.moDay = moment().subtract(2, "days").format('YYYY-MM-DD')
         this.week.weDay = whatDate
