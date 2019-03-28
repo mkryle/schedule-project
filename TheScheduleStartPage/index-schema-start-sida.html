@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <met created() { created() { charset="utf-8" />
+  <title>Schedule-Project</title>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+  <script src="../node_modules/moment/moment.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+
+  <div id="app">
+
+    <div id="week">
+      <div class="day">
+        <div class="rubrik">{{week.Monday}}</div>
+        <div class="datum">{{week.moDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{week.Tuesday}}</div>
+        <div class="datum">{{week.tuDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{week.Wensday}}</div>
+        <div class="datum">{{week.weDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{week.Thursday}}</div>
+        <div class="datum">{{week.thDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{week.Friday}}</div>
+        <div class="datum">{{week.frDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{week.Saturday}}</div>
+        <div class="datum">{{week.saDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{week.Sunday}}</div>
+        <div class="datum">{{week.suDay}}</div>
+      </div>
+    </div>
+
+    <div id="nextWeek">
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Monday}}</div>
+        <div class="datum">{{nextWeek.moDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Tuesday}}</div>
+        <div class="datum">{{nextWeek.tuDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Wensday}}</div>
+        <div class="datum">{{nextWeek.weDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Thursday}}</div>
+        <div class="datum">{{nextWeek.thDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Friday}}</div>
+        <div class="datum">{{nextWeek.frDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Saturday}}</div>
+        <div class="datum">{{nextWeek.saDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Sunday}}</div>
+        <div class="datum">{{nextWeek.suDay}}</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="index.js"></script>
+</body>
+
+</html>

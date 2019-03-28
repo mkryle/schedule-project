@@ -49,15 +49,13 @@ app.post('/', (request, response) => {
     }
 })
 
-let passCheck = 'this.password'
-
-app.get('/login/:name', (request, response) => {
+app.get('/login/:name/:password', (request, response) => {
     database.all('SELECT password, salt FROM logins WHERE name = ?;',
         [request.params.name]).then(token => {
         if (request.params.name === token[0].name)
             response.send(token)
 
-        const hashedToken = hashPassword(passCheck, token[0].salt)
+        const hashedToken = hashPassword(request.body.password, token[0].salt)
         if (hashedToken === token[0].password) {
             response.status(201)
             response.send('Logged In')

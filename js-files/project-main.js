@@ -1,4 +1,3 @@
-
 // import store from './store'
 
 // import VueRouteTimeline from 'vue-route-timeline';
@@ -8,6 +7,7 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import router from './router'
 import store from './store'
+import moment from './moment'
 // import FullCalendar from 'vue-full-calendar'
 import 'bulma/css/bulma.css'
 
