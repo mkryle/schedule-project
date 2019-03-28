@@ -1,7 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-  entry: './project-main.js',
+  entry: './js-files/project-main.js',
   mode: 'development',
   module: {
   rules: [
@@ -12,19 +12,23 @@ module.exports = {
     {
       loader: 'vue-loader',
       test: /\.vue$/
+    },
+    {
+      loader: 'file-loader',
+      test: /\.(gif|jpe?g|png|svg)$/
     }
   ],
 },
   output: {
     filename: 'bundle.js',
-    path: __dirname
+    path: __dirname + '/dist'
   },
   plugins: [
     new VueLoaderPlugin()
   ],
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.min.js',
+      vue: 'vue/dist/vue.js',
     }
   }
 }

@@ -21,5 +21,5 @@ const baseRoutes = [{
 
 const routes = baseRoutes.concat(adminRouter, UserRouter);
 export default new Router({
-  routes,
+  routes
 });
