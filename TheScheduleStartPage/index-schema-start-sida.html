@@ -15,8 +15,6 @@
   <div id="app">
 
     <div id="week">
-
-
       <div class="day">
         <div class="rubrik">{{week.Monday}}</div>
         <div class="datum">{{week.moDay}}</div>
@@ -45,11 +43,39 @@
         <div class="rubrik">{{week.Sunday}}</div>
         <div class="datum">{{week.suDay}}</div>
       </div>
-
-
-
     </div>
-    <input type="button" id="ladda" value="send" v-on:click="openWeek()">
+
+    <div id="nextWeek">
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Monday}}</div>
+        <div class="datum">{{nextWeek.moDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Tuesday}}</div>
+        <div class="datum">{{nextWeek.tuDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Wensday}}</div>
+        <div class="datum">{{nextWeek.weDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Thursday}}</div>
+        <div class="datum">{{nextWeek.thDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Friday}}</div>
+        <div class="datum">{{nextWeek.frDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Saturday}}</div>
+        <div class="datum">{{nextWeek.saDay}}</div>
+      </div>
+      <div class="day">
+        <div class="rubrik">{{nextWeek.Sunday}}</div>
+        <div class="datum">{{nextWeek.suDay}}</div>
+      </div>
+    </div>
+
   </div>
 
 

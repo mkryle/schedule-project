@@ -30,15 +30,14 @@ new Vue({
     altSubName: null,
     eventName: null,
     createdBy: null,
-    privateLink: null,
 
   },
   methods: {
     addToSchedule() {
 
-      fetch('http://localhost:3000/', {
+      fetch('http://95.216.198.12:3000/', {
 
-        body: '{  "date": "' + this.date + '", "startTime": "' + this.startTime + '", "endTime": "' + this.endTime + '", "topName": "' + this.topName + '", "subName": "' + this.subName + '", "altSubName": "' + this.altSubName + '", "eventName": "' + this.eventName + '", "createdBy": "' + this.createdBy + '", "privateLink": "' + this.privateLink + '" }',
+        body: '{  "date": "' + this.date + '", "startTime": "' + this.startTime + '", "endTime": "' + this.endTime + '", "topName": "' + this.topName + '", "subName": "' + this.subName + '", "altSubName": "' + this.altSubName + '", "eventName": "' + this.eventName + '", "createdBy": "' + this.createdBy + '" }',
         headers: {
           'Content-Type': 'application/json'
         },

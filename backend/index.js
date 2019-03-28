@@ -19,7 +19,7 @@ let database
 
 
 //assign databas
-sqlite.open('database/schema.sqlite').then(database_ => {
+sqlite.open('databases/schema.sqlite').then(database_ => {
     database = database_
 }) // Open DB end 
 
@@ -57,21 +57,12 @@ app.get('/bytopname/:topName', (request, response) => {
     response.status(201)
 }) //db run close
 
-// get privateLink
-app.get('/byprivatelink/:privateLink', (request, response) => {
-    database.run('SELECT * FROM schema WHERE privateLink=?;',
-        [request.params.privateLink]
-    ).then(schema => {
-        response.send(schema)
-    }) // db all end
-    response.status(201)
-}) //db run close
 
 
 // get createdBy
-app.get('/createdby/:createdBy', (request, response) => {
+app.get('/createdby/:namn', (request, response) => {
     database.run('SELECT * FROM schema WHERE createdBy=?;',
-        [request.params.createdBy]
+        [request.params.namn]
     ).then(schema => {
         response.send(schema)
     }) // db all end
@@ -81,8 +72,8 @@ app.get('/createdby/:createdBy', (request, response) => {
 
 //post för att lägga till i schemat
 app.post('/', (request, response) => {
-    database.run('INSERT INTO schema VALUES (?,?,?,?,?,?,?,?,?,?)',
-        [request.body.date, request.body.startTime, request.body.endTime, request.body.topName, request.body.subName, request.body.altSubName, request.body.eventName, request.body.createdBy, request.body.privateLink, uuidv4()]
+    database.run('INSERT INTO schema VALUES (?,?,?,?,?,?,?,?,?)',
+        [request.body.date, request.body.startTime, request.body.endTime, request.body.topName, request.body.subName, request.body.altSubName, request.body.eventName, request.body.createdBy, uuidv4()]
     ).then(() => {
         database.all('SELECT * FROM schema').then(schema => {
             response.send(schema)
