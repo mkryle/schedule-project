@@ -1,4 +1,3 @@
-import axios from 'axios'
 import Vue from 'vue'
 var baseServerUrl = 'http://localhost:7000';
 export default {
