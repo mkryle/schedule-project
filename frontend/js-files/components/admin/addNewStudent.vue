@@ -1,5 +1,13 @@
 <template>
   <div class="hero">
+
+
+    <p v-if="errors.length">
+   <b>Please correct the following error(s):</b>
+   <ul>
+     <li v-for="error in errors">{{ error }}</li>
+   </ul>
+ </p>
 <div class="field is-grouped">
   <p class="control">
     <label class="label" for="username">Student Name</label>
@@ -18,7 +26,7 @@ export default {
   name: 'AddNewStudent',
   data(){
     return{
-      msg: ''
+      errors: []
     }
   },
   computed: {
@@ -35,13 +43,18 @@ export default {
         return this.$store.getters.studentCourse
       },
       set(value) {
-        this.$store.commit("STUDENT_COURSE", value)
+          this.$store.commit("STUDENT_COURSE", value)
       }
     }
   },
   methods: {
     addStudent() {
-      this.$store.commit('addStudent')
+      if (this.STUDENT_NAME.length > 0 && this.STUDENT_COURSE.length > 0) {
+        this.$store.commit('addStudent')
+        return true;
+      }else {
+        this.errors.push('Name & Course field are required');
+      }
     }
   }
 }
