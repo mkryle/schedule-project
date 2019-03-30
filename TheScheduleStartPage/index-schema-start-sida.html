@@ -6,7 +6,7 @@
   <title>Schedule-Project</title>
   <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
-  <script src="../node_modules/moment/moment.js"></script>
+  <script src="moment.js"></script>
   <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 
@@ -18,30 +18,37 @@
       <div class="day">
         <div class="rubrik">{{week.Monday}}</div>
         <div class="datum">{{week.moDay}}</div>
+        {{week.moPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{week.Tuesday}}</div>
         <div class="datum">{{week.tuDay}}</div>
+        {{week.tuPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{week.Wensday}}</div>
         <div class="datum">{{week.weDay}}</div>
+        {{week.wePrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{week.Thursday}}</div>
         <div class="datum">{{week.thDay}}</div>
+        {{week.thPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{week.Friday}}</div>
         <div class="datum">{{week.frDay}}</div>
+        {{week.frPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{week.Saturday}}</div>
         <div class="datum">{{week.saDay}}</div>
+        {{week.saPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{week.Sunday}}</div>
         <div class="datum">{{week.suDay}}</div>
+        {{week.suPrint}}
       </div>
     </div>
 
@@ -49,32 +56,45 @@
       <div class="day">
         <div class="rubrik">{{nextWeek.Monday}}</div>
         <div class="datum">{{nextWeek.moDay}}</div>
+        {{nextWeek.moPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{nextWeek.Tuesday}}</div>
         <div class="datum">{{nextWeek.tuDay}}</div>
+        {{nextWeek.tuPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{nextWeek.Wensday}}</div>
         <div class="datum">{{nextWeek.weDay}}</div>
+        {{nextWeek.wePrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{nextWeek.Thursday}}</div>
         <div class="datum">{{nextWeek.thDay}}</div>
+        {{nextWeek.thPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{nextWeek.Friday}}</div>
         <div class="datum">{{nextWeek.frDay}}</div>
+        {{nextWeek.frPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{nextWeek.Saturday}}</div>
         <div class="datum">{{nextWeek.saDay}}</div>
+        {{nextWeek.saPrint}}
       </div>
       <div class="day">
         <div class="rubrik">{{nextWeek.Sunday}}</div>
         <div class="datum">{{nextWeek.suDay}}</div>
+        {{nextWeek.suPrint}}
       </div>
     </div>
+
+
+    <label for="createdBy">Öppna schema, skapad av: (namn)</label>
+    <input type="text" name="createdBy" v-model="createdBy">
+    <input type="button" id="ladda" value="öppna schema" v-on:click="loadSchedule()">
+
 
   </div>
 

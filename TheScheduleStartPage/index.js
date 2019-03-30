@@ -159,40 +159,54 @@ new Vue({
     eventName: null,
     createdBy: null,
 
-
+    test: null,
 
     week: {
       Monday: 'Måndag',
       moDay: null,
+      moPrint: null,
       Tuesday: 'Tisdag',
       tuDay: null,
+      tuPrint: null,
       Wensday: 'Onsdag',
       weDay: null,
+      wePrint: null,
       Thursday: 'Torsdag',
       thDday: null,
+      thPrint: null,
       Friday: 'Fredag',
       frDay: null,
+      frPrint: null,
       Saturday: 'Lördag',
       saDay: null,
+      saPrint: null,
       Sunday: 'Söndag',
-      suDay: null
+      suDay: null,
+      suPrint: null
     },
 
     nextWeek: {
       Monday: 'Måndag',
       moDay: null,
+      moPrint: null,
       Tuesday: 'Tisdag',
       tuDay: null,
+      tuPrint: null,
       Wensday: 'Onsdag',
       weDay: null,
+      wePrint: null,
       Thursday: 'Torsdag',
       thDday: null,
+      thPrint: null,
       Friday: 'Fredag',
       frDay: null,
+      frPrint: null,
       Saturday: 'Lördag',
       saDay: null,
+      saPrint: null,
       Sunday: 'Söndag',
-      suDay: null
+      suDay: null,
+      suPrint: null
     }
 
   },
@@ -213,11 +227,112 @@ new Vue({
       }).then(function (reasult) {
         console.log('added to schedule')
       })
-    }
+    },
 
+    loadSchedule() {
+
+
+      //thisweek
+      fetch('http://localhost:3000/byWhoAndDate/' + this.week.moDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.week.moPrint = result
+          console.log(this.week.moPrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.week.tuDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.week.tuPrint = result
+          console.log(this.week.tuPrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.week.weDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.week.wePrint = result
+          console.log(this.week.wePrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.week.thDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.week.thPrint = result
+          console.log(this.week.thPrint)
+        })
+      fetch('http://localhost:3000/byWhoAndDate/' + this.week.frDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.week.frPrint = result
+          console.log(this.week.frPrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.week.saDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.week.saPrint = result
+          console.log(this.week.saPrint)
+        })
+      fetch('http://localhost:3000/byWhoAndDate/' + this.week.suDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.week.suPrint = result
+          console.log(this.week.suPrint)
+        })
+
+
+      //nextweek
+      fetch('http://localhost:3000/byWhoAndDate/' + this.nextWeek.moDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.nextWeek.moPrint = result
+          console.log(this.nextWeek.moPrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.nextWeek.tuDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.nextWeek.tuPrint = result
+          console.log(this.nextWeek.tuPrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.nextWeek.weDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.nextWeek.wePrint = result
+          console.log(this.nextWeek.wePrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.nextWeek.thDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.nextWeek.thPrint = result
+          console.log(this.nextWeek.thPrint)
+        })
+      fetch('http://localhost:3000/byWhoAndDate/' + this.nextWeek.frDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.nextWeek.frPrint = result
+          console.log(this.nextWeek.frPrint)
+        })
+
+      fetch('http://localhost:3000/byWhoAndDate/' + this.nextWeek.saDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.nextWeek.saPrint = result
+          console.log(this.nextWeek.saPrint)
+        })
+      fetch('http://localhost:3000/byWhoAndDate/' + this.nextWeek.suDay + '/' + this.createdBy)
+        .then(response => response.json())
+        .then(result => {
+          this.nextWeek.suPrint = result
+          console.log(this.nextWeek.suPrint)
+        })
+
+
+    },
 
   },
-
 
 
   el: '#app',
