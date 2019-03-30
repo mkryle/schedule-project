@@ -10,7 +10,6 @@
     <input v-model="STUDENT_COURSE" class="input" type="text" id="fullName" placeholder="student Course">
     </p>
     <button class="button" @click="addStudent()">Add</button>
-    <p class="tag is-success" v-show="show">{{msg}}</p>
   </div>
   </div>
 </template>
