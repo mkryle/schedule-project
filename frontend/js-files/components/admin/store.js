@@ -1,75 +1,94 @@
+import axios from 'axios'
+import Vue from 'vue'
+var baseServerUrl = 'http://localhost:7000';
 export default {
   state: {
-    events: [
-      {
-        title     : 'event2',
-        start     : '2019-03-25',
-        end       : '2019-03-26',
-        cssClass  : ['family', 'career'],
-        YOUR_DATA : {
-          id: '8d77b83a-c28e-430f-9177-8b443975d210',
-          start: '2019-03-19',
-          day: 'måndag',
-          startTime: '07:00',
-          endTime: '16:00',
-          teacher: 'Jon',
-          subject: 'Javascript',
-          rom: 'Firewall',
-          courseGroup: 'Webb18'
-        }
-      },
-      {
-        id: '8d77b83a-c28e-430f-9177-8b443975d210',
-        start: '2019-03-20',
-        day: 'tisdag',
-        startTime: '15:00',
-        endTime: '18:00',
-        teacher: 'Jon',
-        subject: 'Javascript',
-        rom: 'Firewall',
-        courseGroup: 'Webb18'
-      },
-      {
-        id: '8d77b83a-c28e-430f-9177-8b443975d210',
-        start: '2019-03-21',
-        title: 'event1',
-        day: 'onsdag',
-        startTime: '07:00',
-        endTime: '16:00',
-        teacher: 'Jon',
-        subject: 'Javascript',
-        rom: 'Firewall',
-        courseGroup: 'Webb18'
-      },
-    ],
+     students: [],
+     studentId: '',
+     studentName: '',
+     studentCourse: ''
   },
   actions:{
-    addSchedule(state, schedule) {
-      state.commit('scheduleIsAdded', { schedule });
-    },
-    patchPerson(state, schedule) {
-      state.commit('scheduleIsPatched', { schedule });
-    },
-    removePerson(state, scheduleId) {
-      state.commit('scheduleIsRemoved', { scheduleId });
-    },
+
+},
+  mutations: {
+LOAD_USERS(state){
+  fetch('http://localhost:7000/admin/getStudents')
+    .then(response => response.json())
+    .then(result => {
+      state.students = result
+    })
+},
+addStudent(state) {
+  fetch(baseServerUrl + '/admin/getStudents', {
+  body: JSON.stringify({name: state.studentName, courseid: state.studentCourse}),
+  headers: {
+    'Content-Type': 'application/json'
   },
-  mutations:{
-    scheduleIsAdded(state, payload) {
-      state.events.push(payload.schedule);
+  method: 'POST'
+}).then(function (response) {
+  return response.json()
+}).then(function (result) {
+  console.log(result)
+  console.log('New Student Successfully added')
+})
+  state.students.push({studentId: state.studentId, studentName: state.courseid, studentCourse: state.studentCourse});
+  state.studentId = ""
+  state.studentName = ""
+  state.studentCourse = ""
+},
+SET_STUDENT_ID(state, payload) {
+  state.studentId = payload
+},
+STUDENT_NAME(state, payload) {
+  state.studentName = payload
+},
+STUDENT_COURSE(state, payload) {
+  state.studentCourse = payload
+},
+DELETE_USER(state, index) {
+  fetch(baseServerUrl +'/admin/getStudents/' + index, {
+    method: 'DELETE'
+  }).then(() => {
+              console.log('removed===>>>> ' + index);
+              // self.filterUsers();
+              state.students.splice(index, 1)
+          })
+},
+EDIT_STUDENT(state, index) {
+  fetch(baseServerUrl + '/admin/getStudents/' + index, {
+    body: JSON.stringify({name: state.studentName, courseid: state.studentCourse}),
+    headers: {
+      'Content-Type': 'application/json'
     },
-    scheduleIsPatched(state, payload) {
-      const { schedule } = payload;
-      const items = state.events.map(item => (item.id === schedule.id ? schedule : item));
-      Vue.set(state, 'items', items);
-    },
-    scheduleIsRemoved(state, payload) {
-      const items = state.events.filter(item => item.id !== payload.scheduleId);
-      Vue.set(state, 'items', items);
-    },
+    method: 'PUT'
+  }).then(() => {
+              console.log('UPDATED ===>>>> ' + index);
+              // self.filterUsers();
+              state.students.splice(index, 1)
+          })
+}
   },
   getters:{
-    getItems: state => state.events,
-    getItem: state => payload => Object.assign({}, state.events.find(item => item.id === payload.id)),
+    getStudents: state => {
+    return state.students;
+  },
+  loadAll: state => {
+    fetch(baseServerUrl + '/admin/getStudents')
+      .then(response => response.json())
+      .then(result => {
+        state.students = result
+      })
+  return state.students;
+},
+  studentId: state => {
+    return state.studentId;
+  },
+  studentName: state => {
+    return state.studentName;
+  },
+  studentCourse: state => {
+    return state.studentCourse;
+  }
   }
 };

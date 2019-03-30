@@ -1,6 +1,6 @@
 <template>
-<div>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
         <h2>{{ msg }} {{ $route.params.id }}</h2>
@@ -15,7 +15,7 @@
       </div>
     </div>
   </nav>
-  <router-view></router-view>
+      <router-view></router-view>
 </div>
 
 </template>
