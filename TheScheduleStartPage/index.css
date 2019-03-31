@@ -28,6 +28,11 @@ html {
     margin-bottom: 10px;
 }
 
+.event {
+    background-color: chartreuse;
+    margin-bottom: 10px;
+}
+
 .tidinput {
     width: 60px;
 }
