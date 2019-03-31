@@ -48,8 +48,8 @@ new Vue({
       this.nextWeek.suDay = moment().add(12, "days").format('YYYY-MM-DD')
 
     } else if (whatDay === 'Wednesday') {
-      this.week.tuDay = moment().subtract(1, "days").format('YYYY-MM-DD')
-      this.week.moDay = moment().subtract(2, "days").format('YYYY-MM-DD')
+      this.week.tuDay = moment().subtract(2, "days").format('YYYY-MM-DD')
+      this.week.moDay = moment().subtract(1, "days").format('YYYY-MM-DD')
       this.week.weDay = whatDate
       this.week.thDay = moment().add(1, "days").format('YYYY-MM-DD')
       this.week.frDay = moment().add(2, "days").format('YYYY-MM-DD')
@@ -164,49 +164,50 @@ new Vue({
     week: {
       Monday: 'Måndag',
       moDay: null,
-      moPrint: null,
+      moPrint: [{}],
       Tuesday: 'Tisdag',
       tuDay: null,
-      tuPrint: null,
+      tuPrint: [{}],
       Wensday: 'Onsdag',
       weDay: null,
-      wePrint: null,
+      wePrint: [{}],
       Thursday: 'Torsdag',
       thDday: null,
-      thPrint: null,
+      thPrint: [{}],
       Friday: 'Fredag',
       frDay: null,
-      frPrint: null,
+      frPrint: [{}],
       Saturday: 'Lördag',
       saDay: null,
-      saPrint: null,
+      saPrint: [{}],
       Sunday: 'Söndag',
       suDay: null,
-      suPrint: null
+      suPrint: [{}],
+
     },
 
     nextWeek: {
       Monday: 'Måndag',
       moDay: null,
-      moPrint: null,
+      moPrint: [{}],
       Tuesday: 'Tisdag',
       tuDay: null,
-      tuPrint: null,
+      tuPrint: [{}],
       Wensday: 'Onsdag',
       weDay: null,
-      wePrint: null,
+      wePrint: [{}],
       Thursday: 'Torsdag',
       thDday: null,
-      thPrint: null,
+      thPrint: [{}],
       Friday: 'Fredag',
       frDay: null,
-      frPrint: null,
+      frPrint: [{}],
       Saturday: 'Lördag',
       saDay: null,
-      saPrint: null,
+      saPrint: [{}],
       Sunday: 'Söndag',
       suDay: null,
-      suPrint: null
+      suPrint: [{}],
     }
 
   },
@@ -237,47 +238,46 @@ new Vue({
         .then(response => response.json())
         .then(result => {
           this.week.moPrint = result
-          console.log(this.week.moPrint)
         })
+
 
       fetch('http://localhost:3000/byWhoAndDate/' + this.week.tuDay + '/' + this.createdBy)
         .then(response => response.json())
         .then(result => {
           this.week.tuPrint = result
-          console.log(this.week.tuPrint)
         })
 
       fetch('http://localhost:3000/byWhoAndDate/' + this.week.weDay + '/' + this.createdBy)
         .then(response => response.json())
         .then(result => {
           this.week.wePrint = result
-          console.log(this.week.wePrint)
+
         })
 
       fetch('http://localhost:3000/byWhoAndDate/' + this.week.thDay + '/' + this.createdBy)
         .then(response => response.json())
         .then(result => {
           this.week.thPrint = result
-          console.log(this.week.thPrint)
+
         })
       fetch('http://localhost:3000/byWhoAndDate/' + this.week.frDay + '/' + this.createdBy)
         .then(response => response.json())
         .then(result => {
           this.week.frPrint = result
-          console.log(this.week.frPrint)
+
         })
 
       fetch('http://localhost:3000/byWhoAndDate/' + this.week.saDay + '/' + this.createdBy)
         .then(response => response.json())
         .then(result => {
           this.week.saPrint = result
-          console.log(this.week.saPrint)
+
         })
       fetch('http://localhost:3000/byWhoAndDate/' + this.week.suDay + '/' + this.createdBy)
         .then(response => response.json())
         .then(result => {
           this.week.suPrint = result
-          console.log(this.week.suPrint)
+
         })
 
 
