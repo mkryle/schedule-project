@@ -1,23 +1,40 @@
 //läser in skit
 const express = require('express')
-const studentsAPI = require('./studentsAPI')
-const schemaAPI = require('./schemaAPI')
+const app = express()
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
 const path = require('path')
-var cors = require('cors')
+const sqlite = require('sqlite')
+const uuidv4 = require('uuidv4')
+app.use(express.static(path.join(path.resolve(), 'public')))
+app.use(function (request, result, next) {
+    result.header('Access-Control-Allow-Origin', '*');
+    result.header('Access-Control-Allow-Headers', 'Content-Type');
+    result.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+});
 
-const app = express();
-
-app.use(cors())
-
+//skapa databas
+let database
 
 
+//assign databas
+sqlite.open('databases/schema.sqlite').then(database_ => {
+    database = database_
+}) // Open DB end 
 
-app.use(studentsAPI);
-app.use(schemaAPI);
-
-
-
-
+app.use(function (request, result, next) {
+    result.header('Access-Control-Allow-Origin', '*');
+    result.header('Access-Control-Allow-Headers', 'Content-Type');
+    result.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+});
+//get all
+app.get('/', (request, response) => {
+    database.all('SELECT * FROM schema').then(schema => {
+        response.send(schema)
+    }) // db all end
+}) // get ends
 
 // load the day
 app.get('/byWhoAndDate/:datum/:namn', (request, response) => {
