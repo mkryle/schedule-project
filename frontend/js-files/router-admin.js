@@ -7,6 +7,7 @@ import AdminListEvents from './components/admin/adminListEvents.vue';
 import addNewEvent from './components/admin/addNewEvent.vue';
 import addNewStudent from './components/admin/addNewStudent.vue';
 import editStudent from './components/admin/editStudent.vue';
+import AdminIndex from './components/admin/index.vue';
 
 
 
@@ -14,8 +15,13 @@ import editStudent from './components/admin/editStudent.vue';
 export default [
        {
               path: '/admin/:id',
-              component: AdminHome,
+              name: 'admin-index',
+              component: AdminIndex,
               children: [{
+                      path: '/admin/:id/home',
+                      name: 'admin-home',
+                      component: AdminHome,
+                    },{
                       path: '/admin/:id/events',
                       name: 'admin-events',
                       component: AdminListEvents,
