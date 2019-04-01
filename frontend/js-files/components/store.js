@@ -4,29 +4,29 @@ export default {
   state: {
     accessToken:  localStorage.getItem('access_token') ||  '',
     currentUser : {},
-    admins:[
-      {
-        username: 'admin',
-        password: 'admin'
-      }
-    ]
+    // admins:[
+    //   {
+    //     username: 'admin',
+    //     password: 'admin'
+    //   }
+    // ]
   },
   actions:{
-    login (state,admin) {
-    state.commit('LOGIN',admin)
-  }
+  //   login (state,admin) {
+  //   state.commit('LOGIN',admin)
+  // }
   },
   mutations: {
-    LOGIN(state,res){
-
-
-        if(state.admins.username === res.username){
-            if(state.admins.password === res.password){
-                state.seccLogin = 1
-            }
-        }
-
-}
+//     LOGIN(state,res){
+//
+//
+//         if(state.admins.username === res.username){
+//             if(state.admins.password === res.password){
+//                 state.seccLogin = 1
+//             }
+//         }
+//
+// }
   },
   getters:{
 
