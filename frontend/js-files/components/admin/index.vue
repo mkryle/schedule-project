@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div v-if="admin.username == $route.params.id">
+      <div v-if="tokens != null">
       <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
@@ -22,6 +22,7 @@
     </div>
     <div v-else="" class="notification is-danger">
         {{notAdmin}}
+              <button class="button" @click="$router.go(-1)">Go back</button>
     </div>
 </div>
 </template>
@@ -33,14 +34,25 @@
             msg: 'Im logged as: ',
             notAdmin: 'This Page is only for Admins',
             admin: {
-              username: null
-            }
+              username: null,
+              password: null
+            },
+            newTokens: 'asjdka7342jukadasdu32474jads',
+            tokens: null
           }
+        },
+        created(){
+           return this.tokens = this.$store.getters.getTokens
+           console.log('tokens'+this.tokens);
         },
         mounted() {
                let usernames = this.$route.params.id
+               console.log('oldTokens'+this.tokens);
+               console.log('NEWtokens'+this.newTokens);
+               // this.tokens = this.$store.getters.getTokens
                return this.admin = this.$store.getters.getAdmins.find((p) => p.username === usernames) || {}
                // this.user = this.$store.getters.getItem
+              // return this.tokens = this.$store.getters.getTokens
            }
     }
 </script>
