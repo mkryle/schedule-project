@@ -17,7 +17,7 @@
                   id="name"
                   type="text"
                   placeholder="Username"
-                  v-model="username"
+                  v-model="admin.username"
                 >
                 <i class="fa fa-user"></i>
               </p>
@@ -27,7 +27,7 @@
                   id="password"
                   type="password"
                   placeholder="Password"
-                  v-model="password"
+                  v-model="admin.password"
                 >
                 <i class="fa fa-lock"></i>
               </p>
@@ -63,16 +63,27 @@
   export default {
     data(){
       return {
-        email : "",
-        password : ""
+        admin :{
+            username:'',
+            password:''
+        }
       }
     },
     methods:{
-     submitLogin(){
-       const email = this.email
-        const password = this.password
-        this.$store.dispatch('login', { email, password }).then(() => this.$router.push('/admin/'))
-     }
+      submitLogin(){
+     const the = this;
+     let id = this.$route.params.userId
+     this.$store.dispatch('login',this.admin).then(function(){
+         if(the.$store.state.seccLogin){
+             console.log('Welcome admin')
+             the.$router.push('/admin/'+ the.admin.username)
+             the.$store.state.seccLogin = 0
+         }else{
+             console.log('You are hacker')
+                        the.$router.push('/admin/'+ the.admin.username)
+         }
+     })
+ }
  }
 
 
