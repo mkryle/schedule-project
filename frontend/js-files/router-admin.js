@@ -39,6 +39,7 @@ export default [
                       path: '/admin/:id/editStudent/:userId',
                       name: 'admin-edit-student',
                       component: editStudent,
+                      props: true
                     }]
       }
     ]

@@ -5,7 +5,6 @@ const sqlite = require('sqlite')
 var router = express.Router();
 router.use(bodyParser.json());
 
-
 router.get('/admin', (req, res) => res.send('Hello Admin'))
 
 let database
@@ -49,7 +48,7 @@ router.delete('/admin/getStudents/:id', (req, res) => {
 //   // const studentID = student.id;
 // 	// const studentName = student.name;
 //   // const studentCourseid = student.Courseid;
-//     database.run('UPDATE users SET name=?, courseid=?, WHERE id=?',
+//     database.run('UPDATE users SET name=?, courseid=?, WHERE id=?;',
 //         [req.body.name, req.body.courseid, req.params.id]
 //       ).then((err, result) => {
 //               if (err){
@@ -64,31 +63,40 @@ router.delete('/admin/getStudents/:id', (req, res) => {
 //     }) //db run close
 // })
 
+router.put('/admin/getStudents/:id', (req, res) => {
+    database.run('UPDATE users SET name=?, courseid=? WHERE id=?;',
+        [req.body.name, req.body.courseid, req.params.id]
+    ).then(() => {
+        database.all('SELECT * FROM schema').then(result => {
+            res.send(result)
+        }) // db all end
+        res.status(201)
+    }) //db run close
+}) // app del close
 
 // new update Testing
-router.patch("/admin/getStudents/:id", (req, res, next) => {
-    var data = {
-        name: req.body.name,
-        courseid: req.body.courseid,
-    }
-    database.run(
-        `UPDATE users set
-           name = COALESCE(?,name),
-           courseid = COALESCE(?,courseid)
-           WHERE id = ?`,
-        [data.name, data.courseid, req.params.id],
-        function (err, result) {
-            if (err){
-                res.status(400).json({"error": res.message})
-                return;
-            }
-            res.json({
-                message: "success",
-                data: data,
-                changes: this.changes
-            })
-    });
-})
+// router.patch("/admin/getStudents/:id", (req, res, next) => {
+//     var data = {
+//         name: req.body.name,
+//         courseid: req.body.courseid,
+//     }
+//     database.run(
+//         `UPDATE users set
+//            name = coalesce(?,name),
+//            courseid = COALESCE(?,courseid)
+//            WHERE id = ?`,
+//         [data.name, data.courseid, req.params.id],
+//         (err, result) => {
+//             if (err){
+//                 res.status(400).json({"error": res.message})
+//                 return;
+//             }
+//             res.json({
+//                 message: "success",
+//                 data: data
+//             })
+//     });
+// })
 //add new posts into database
 router.post('/admin/getStudents', (req, res) => {
     database.run('INSERT INTO users VALUES (?,?,?)',

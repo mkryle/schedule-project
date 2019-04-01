@@ -1,5 +1,6 @@
 <template>
     <div class="container is-centered">
+
         <h1>  {{ msg }} </h1>
         <div class="hero is-large is-light">
 <section class="section">
@@ -69,7 +70,7 @@
 </section>
 </div>
 
-    </div>
+</div>
 </template>
 <script>
     export default{

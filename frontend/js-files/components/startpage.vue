@@ -1,4 +1,7 @@
 <template>
+  <div class="">
+
+
   <section class="hero is-fullheight is-dark is-bold">
     <div class="hero-body">
       <div class="container">
@@ -14,7 +17,7 @@
                   id="name"
                   type="text"
                   placeholder="Username"
-                  v-model="name"
+                  v-model="username"
                 >
                 <i class="fa fa-user"></i>
               </p>
@@ -52,11 +55,28 @@
       </div>
     </div>
   </section>
+    </div>
 </template>
 
 <script>
-  import frontend from "../frontend";
-  export default {};
+  // import frontend from "../frontend";
+  export default {
+    data(){
+      return {
+        email : "",
+        password : ""
+      }
+    },
+    methods:{
+     submitLogin(){
+       const email = this.email
+        const password = this.password
+        this.$store.dispatch('login', { email, password }).then(() => this.$router.push('/admin/'))
+     }
+ }
+
+
+  };
 
 </script>
 

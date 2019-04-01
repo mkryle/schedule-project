@@ -1,11 +1,10 @@
 <template>
   <div class="hero">
-
     <div v-if="user.id != $route.params.userId" class="notification is-danger">
       this user are not found
     </div>
 <div class="" v-else="" >
-    <p>Current Student Id : {{ $route.params.userId }}</p>
+    <p>{{msg}} : {{ $route.params.userId }}</p>
     <p class="control">
       <label class="label" for="username">Student Name</label>
       <input v-model="user.name" class="input" type="text" id="username" placeholder="student Name">
@@ -14,29 +13,12 @@
       <label class="label" for="fullName">Course ID</label>
       <input v-model="user.courseid" class="input" type="text" id="fullName" placeholder="student Course">
       </p>
-      <button class="button" @click="editUser()">Save</button>
-      <p class="tag is-success" v-if="msg == true">The Student Successfully updated</p>
+      <button class="button" @click.prevent="letsEdit()">Save</button>
+      <button class="button" @click="$router.go(-1)">Cancel</button>
     </div>
 
 </div>
 
-
-
-
-
-<!-- <div class="field is-grouped">
-  <p class="control">
-    <label class="label" for="username">Student Name</label>
-    <input v-model="person.name" class="input" type="text" id="username" placeholder="student Name">
-</p>
-  <p class="control">
-    <label class="label" for="fullName">Course ID</label>
-    <input v-model="person.courseid" class="input" type="text" id="fullName" placeholder="student Course">
-    </p>
-    <button class="button" @click="patchPerson()">Save</button>
-    <p class="tag is-success" v-if="msg == true">The Student Successfully updated</p>
-  </div>
--->
   </div>
 </template>
 <script>
@@ -44,38 +26,48 @@ export default {
   name: 'AddNewStudent',
   data(){
     return{
-      msg: false
+      user: {
+        name:null,
+        courseid: null
+      },
+   msg:'Current Student Id'
     }
   },
   computed: {
-    user() {
-      // getItem
-      let id = this.$route.params.userId
-      return this.$store.getters.loadAll.find((p) => p.id === id) || {}
-      // return this.$store.getters.loadAll
-    },
-    STUDENT_NAME: {
-      get() {
-        return this.$store.getters.studentName
-      },
-      set(value) {
-        this.$store.commit("STUDENT_NAME", value)
-      }
-    },
-    STUDENT_COURSE: {
-      get() {
-        return this.$store.getters.studentCourse
-      },
-      set(value) {
-        this.$store.commit("STUDENT_COURSE", value)
-      }
-    }
-  },
-  methods: {
-    editUser() {
-      this.$store.dispatch('editUser', this.user);
+
  },
-  }
+  methods: {
+    letsEdit(){
+      let id = this.$route.params.userId
+      fetch('http://localhost:7000/admin/getStudents/'+ id, {
+        body: JSON.stringify({ name: this.user.name, courseid: this.user.courseid }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT'
+      })
+  .then(function (response) {
+    return response.json()
+  })
+  .then(function (result) {
+    console.log(result)
+  })
+         // return this.$store.getters['getSingleStudent'](this.$route.params);
+      // this.$store.dispatch('patchPerson', this.person);
+    //   this.$store.commit('EDIT_STUDENT', this.user).then(() => {
+    //   // this.$socket.emit('editItem', {
+    //   //   name: this.itemName,
+    //   //   prevName: this.currentlyEditingName
+    //   //             });
+    //   console.log('teststse');
+    // })
+    }
+},
+ mounted() {
+        let id = this.$route.params.userId
+        return this.user = this.$store.getters.loadAll.find((p) => p.id === id) || {}
+        // this.user = this.$store.getters.getItem
+    },
 }
 // </script>
 <style lang="css" scoped>

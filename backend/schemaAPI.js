@@ -13,7 +13,14 @@ sqlite.open('./databases/schema.sqlite').then(database_ => {
     database = database_
 }) // Open DB end
 
-
+schemaRouter.get('/admin/getSchema/byWhoAndDate/:datum/:namn', (request, response) => {
+    database.all('SELECT * FROM schema WHERE date=? AND createdBy=?;',
+        [request.params.datum, request.params.namn]
+    ).then(schema => {
+        response.send(schema)
+    }) // db all end
+    response.status(201)
+}) //db run close
 
 //get all
 schemaRouter.get('/admin/getSchema', (request, response) => {
@@ -24,27 +31,35 @@ schemaRouter.get('/admin/getSchema', (request, response) => {
 
 
 // get createdBy
-schemaRouter.get('/admin/getSchema/createdBy/:namn', (request, response) => {
-    database.all('SELECT * FROM schema WHERE createdBy=?;',
-        [request.params.namn]
-    ).then(schema => {
-        response.send(schema)
-    }) // db all end
-    response.status(201)
-}) //db run close
+// schemaRouter.get('/admin/getSchema/createdBy/:namn', (request, response) => {
+//     database.all('SELECT * FROM schema WHERE createdBy=?;',
+//         [request.params.namn]
+//     ).then(schema => {
+//         response.send(schema)
+//     }) // db all end
+//     response.status(201)
+// }) //db run close
 
 
 // get datum
-schemaRouter.get('/admin/getSchema/bydate/:datum', (request, response) => {
-    database.all('SELECT * FROM schema WHERE date=?;',
-        [request.params.datum]
+// schemaRouter.get('/admin/getSchema/bydate/:datum', (request, response) => {
+//     database.all('SELECT * FROM schema WHERE date=?;',
+//         [request.params.datum]
+//     ).then(schema => {
+//         response.send(schema)
+//     }) // db all end
+//     response.status(201)
+// }) //db run close
+
+
+schemaRouter.get('/admin/getSchema/byClassAndDate/:datum/:namn', (request, response) => {
+    database.all('SELECT * FROM schema WHERE date=? AND subName=?;',
+        [request.params.datum, request.params.namn]
     ).then(schema => {
         response.send(schema)
     }) // db all end
     response.status(201)
 }) //db run close
-
-
 
 //post för att lägga till i schemat
 schemaRouter.post('/admin/getSchema', (request, response) => {
