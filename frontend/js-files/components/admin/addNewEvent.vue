@@ -31,11 +31,9 @@ executable file 79 lines (76 sloc) 1.63 KB
 
 
 <script>
+export default {
 
 
-
-
-new Vue({
  
   data: {
     date: null,
@@ -73,12 +71,9 @@ new Vue({
       })
     },
 
-  },
+  }
+}
 
-  el: '#app',
-
-
-})
 </script>
 
 <style lang="css" scoped>

@@ -525,14 +525,16 @@
     </div>
 
 
-</div>
+
 </template>
 <script>
 
 
 
+import moment from 'moment'
 
-new Vue({
+export default {
+
   created() {
     
 
@@ -942,10 +944,9 @@ new Vue({
   },
 
 
-  el: '#app',
 
 
-})
+}
 </script>
 <style scoped="">
 
