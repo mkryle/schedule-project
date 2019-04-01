@@ -3,24 +3,30 @@ var baseServerUrl = 'http://localhost:7000';
 export default {
   state: {
     accessToken:  localStorage.getItem('access_token') ||  '',
-    currentUser : {}
+    currentUser : {},
+    admins:[
+      {
+        username: 'admin',
+        password: 'admin'
+      }
+    ]
   },
   actions:{
-    LOGIN(state,res){
-
-        state.admin.forEach(function(eee) {
-            if(eee.username === res.username){
-                if(eee.password === res.password){
-                    state.inLoggat = 1
-                }
-            }
-        }, this);
-      }
+    login (state,admin) {
+    state.commit('LOGIN',admin)
+  }
   },
   mutations: {
-    login ({commit},user) {
-        commit('LOGIN',user)
-      }
+    LOGIN(state,res){
+
+
+        if(state.admins.username === res.username){
+            if(state.admins.password === res.password){
+                state.seccLogin = 1
+            }
+        }
+
+}
   },
   getters:{
 
