@@ -29,12 +29,9 @@ app.use(function (request, result, next) {
     result.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     next();
 });
-//get all
-app.get('/', (request, response) => {
-    database.all('SELECT * FROM schema').then(schema => {
-        response.send(schema)
-    }) // db all end
-}) // get ends
+
+
+
 
 // load the day
 app.get('/byWhoAndDate/:datum/:namn', (request, response) => {
