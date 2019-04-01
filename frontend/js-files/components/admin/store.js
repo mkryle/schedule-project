@@ -5,7 +5,8 @@ export default {
      students: [],
      studentId: '',
      studentName: '',
-     studentCourse: ''
+     studentCourse: '',
+     admins: [{username:'jon'}]
   },
   actions:{
 //     editItem(context, payload) {
@@ -121,6 +122,14 @@ EDIT_STUDENT(state, index) {
         state.students = result
       })
   return state.students;
+},  getAdmins: state => {
+    fetch(baseServerUrl + '/admin/getAdmins')
+      .then(response => response.json())
+      .then(result => {
+        state.admins = result
+      })
+      console.log(state.admins);
+  return state.admins;
 },
   studentId: state => {
     return state.studentId;
