@@ -29,7 +29,14 @@ schemaRouter.get('/admin/getSchema', (request, response) => {
     }) // db all end
 }) // get ends
 
-
+//admin table
+schemaRouter.get('/admin/getAdmins/:adminID', (request, response) => {
+    database.all('SELECT id, username FROM admins WHERE id = ?',
+[request.params.adminID]
+).then(admins => {
+        response.send(admins)
+    }) // db all end
+}) // get ends
 // get createdBy
 // schemaRouter.get('/admin/getSchema/createdBy/:namn', (request, response) => {
 //     database.all('SELECT * FROM schema WHERE createdBy=?;',
