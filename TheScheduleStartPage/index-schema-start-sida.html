@@ -523,12 +523,18 @@
         </div>
       </div>
     </div>
-
-
-    <label for="createdByWho">Öppna schema, skapad av: (namn)</label>
-    <input type="text" name="createdByWho" v-model="createdByWho">
-    <input type="button" id="ladda" value="öppna schema" v-on:click="loadSchedule()">
-
+    <div>
+      <div>
+        <label for="createdByWho">Öppna schema, skapad av: (namn)</label>
+        <input type="text" name="createdByWho" v-model="createdByWho">
+        <input type="button" id="ladda" value="öppna schema" v-on:click="byWhoAndDate()">
+      </div>
+      <div>
+        <label for="createdByWho">Öppna schema, Class: (namn)</label>
+        <input type="text" name="createdByClass" v-model="createdByClass">
+        <input type="button" id="ladda" value="öppna schema" v-on:click="byClassAndDate()">
+      </div>
+    </div>
 
   </div>
 

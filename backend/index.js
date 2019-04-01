@@ -47,6 +47,15 @@ app.get('/byWhoAndDate/:datum/:namn', (request, response) => {
 }) //db run close
 
 
+// load the day
+app.get('/byClassAndDate/:datum/:namn', (request, response) => {
+    database.all('SELECT * FROM schema WHERE date=? AND subName=?;',
+        [request.params.datum, request.params.namn]
+    ).then(schema => {
+        response.send(schema)
+    }) // db all end
+    response.status(201)
+}) //db run close
 
 
 
