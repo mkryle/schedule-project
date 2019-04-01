@@ -1,7 +1,5 @@
 <template>
   <div class="">
-
-
   <section class="hero is-fullheight is-dark is-bold">
     <div class="hero-body">
       <div class="container">
@@ -11,6 +9,12 @@
               <h1 class="title">
                 <img src="../../assets/logo.png" alt="logo" width="220">
               </h1>
+              <p v-if="errors.length">
+             <b>Please correct the following error(s):</b>
+             <ul>
+               <li v-for="error in errors">{{ error }}</li>
+             </ul>
+           </p>
               <p class="control has-icon">
                 <input
                   class="input"
@@ -59,39 +63,36 @@
 </template>
 
 <script>
-  // import frontend from "../frontend";
   export default {
     data(){
       return {
         admin :{
             username:'',
             password:''
-        }
+        },
+        errors: []
       }
     },
     methods:{
       submitLogin(){
-     const the = this;
-     let id = this.$route.params.userId
-     this.$store.dispatch('login',this.admin).then(function(){
-         if(the.$store.state.seccLogin){
-             console.log('Welcome admin')
-             the.$router.push('/admin/'+ the.admin.username)
-             the.$store.state.seccLogin = 0
+     const den = this;
+     den.$store.dispatch('login',den.admin).then(function(){
+         if(den.$store.state.admin.tokens){
+             console.log('Welcome to admin panel')
+             den.$router.push({
+               name: 'admin-index',
+               params: { id: den.admin.username }})
+             den.$store.state.admin.tokens = 'asjdka7342jukadasdu32474jads'
          }else{
-             console.log('You are hacker')
-                        the.$router.push('/admin/'+ the.admin.username)
+             den.errors.push('UserName or Password incorrect');
          }
      })
- }
- }
-
-
+   }
+   }
   };
 
 </script>
 
-<style>
-
+<style scoped="">
 
 </style>
