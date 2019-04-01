@@ -6,57 +6,31 @@ export default {
      studentId: '',
      studentName: '',
      studentCourse: '',
-     admins: [{username:'jon'}]
+     admins: [{
+       username:'jon',
+       password: '12345'
+   },{
+     username:'admin',
+     password: 'admin'
+   }],
+   tokens: null
   },
   actions:{
-//     editItem(context, payload) {
-//     return fetch(baseServerUrl + '/admin/getStudents/'+ payload, {
-//             body: JSON.stringify({name: payload.name, courseid: payload.courseid}),
-//             headers: {
-//               'Content-Type': 'application/json'
-//             },
-//             method: 'PUT'
-//           }).then((response) => {
-//                       console.log('UPDATED ===>>>> ' + JSON.stringify(payload));
-//
-//                       context.commit('REFRESH_ITEM_LIST', response.data);
-//                   })
-// },
-    // refreshItemList(context) {
-		// 	// axios.get(`${API_BASE_URL}/items`).then((response) => {
-		// 	// 	context.commit('REFRESH_ITEM_LIST', response.data);
-		// 	// })
-    //   fetch(baseServerUrl + '/admin/getStudents/' + index, {
-    //     body: JSON.stringify({name: state.studentName, courseid: state.studentCourse}),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     method: 'PUT'
-    //   }).then((response) => {
-    //               console.log('UPDATED ===>>>> ' + index);
-    //               context.commit('REFRESH_ITEM_LIST', response.data);
-    //           })
-    // },
-//     patchPerson(state, person) {
-//   state.commit('personIsPatched', { person })
-// }
+    login (state,admin) {
+    state.commit('LOGIN',admin)
+    }
 },
   mutations: {
-//     personIsPatched(state, payload) {
-//   const { person } = payload;
-//   const items = state.students.map(item => (item.id === person.id ? person : item));
-//   Vue.set(state, 'students', items);
-// },
-  //   updateContentBlock(state, contentBlock) {
-  //   const index = state.students.findIndex(block => block.id === contentBlock.id)
-  //   Vue.set(state.students, index, contentBlock)
-  // },
-LOAD_USERS(state){
-  fetch('http://localhost:7000/admin/getStudents')
-    .then(response => response.json())
-    .then(result => {
-      state.students = result
-    })
+    // function is to check if username and password is squal with the resquested input
+    LOGIN(state,res){
+      state.admins.forEach(function(one) {
+       if(one.username === res.username){
+           if(one.password === res.password){
+               state.tokens = 'asjdka7342jukadasdu32474jads'
+           }
+       }
+});
+
 },
 addStudent(state) {
   fetch(baseServerUrl + '/admin/getStudents', {
@@ -115,6 +89,9 @@ EDIT_STUDENT(state, index) {
     getStudents: state => {
     return state.students;
   },
+  getTokens: state => {
+  return state.tokens;
+},
   loadAll: state => {
     fetch(baseServerUrl + '/admin/getStudents')
       .then(response => response.json())
@@ -128,7 +105,7 @@ EDIT_STUDENT(state, index) {
       .then(result => {
         state.admins = result
       })
-      console.log(state.admins);
+
   return state.admins;
 },
   studentId: state => {
