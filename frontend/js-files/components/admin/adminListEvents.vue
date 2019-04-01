@@ -869,6 +869,8 @@ export default {
 </script>
 
 <style scoped="">
+
+
 html {
     background-color: silver;
     text-align: center;
