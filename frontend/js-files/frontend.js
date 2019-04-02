@@ -3,23 +3,27 @@ import Vue from 'vue';
 new Vue({
     created() {},
     data: {
-        name: 'admin',
-        password: 'admin',
+        name: null,
+        password: null,
     },
     methods: {
         submitLogin() {
-            fetch('/login', {
+            fetch('http://localhost:3000/login/' + this.name + '/' + this.password)
+        }
+    },
+
+    addUser: function () {
+        fetch('http://localhost:3000', {
                 body: '{  "name": "' + this.name + '", "password": "' + this.password + '" }',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method: 'POST'
-            }).then(function (response) {
-                return response.json()
-            }).then(function (result) {
+            })
+            .then(response => response.json())
+            .then(result => {
                 console.log(result)
             })
-        }
     },
 
     el: '#app'
