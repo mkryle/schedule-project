@@ -7,6 +7,12 @@ const sha512 = require('js-sha512')
 const hiddenSalt = '123456789'
 
 app.use(bodyParser.json())
+app.use(function (request, result, next) {
+    result.header('Access-Control-Allow-Origin', '*');
+    result.header('Access-Control-Allow-Headers', 'Content-Type');
+    result.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+});
 
 let database
 
@@ -43,16 +49,21 @@ app.post('/', (request, response) => {
     }
 })
 
-app.put('/:editUser', (request, response) => {
-    database.run('UPDATE logins SET name=?, password=? WHERE name=?',
-            [request.body.name, request.body.password, request.params.editUser])
-        .then(() => {
-            database.all('SELECT * FROM logins').then(logins => {
-                response.send(logins)
-            })
+app.get('/login/:name/:password', (request, response) => {
+    database.all('SELECT password, salt FROM logins WHERE name = ?;',
+        [request.params.name]).then(token => {
+        if (request.params.name === token[0].name)
+            response.send(token)
+
+        const hashedToken = hashPassword(request.body.password, token[0].salt)
+        if (hashedToken === token[0].password) {
             response.status(201)
-            response.send('Your Profile Has Been Edited')
-        })
+            response.send('Logged In')
+        } else {
+            response.status(400)
+            response.send('Invalid Login')
+        }
+    })
 })
 
 app.delete('/:user', (request, response) => {
