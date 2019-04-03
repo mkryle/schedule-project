@@ -1,7 +1,8 @@
 
-executable file 79 lines (76 sloc) 1.63 KB
 <template>
- 
+ <div class="">
+
+
 
         <div>
             <label for="date">Datum:</label>
@@ -27,14 +28,16 @@ executable file 79 lines (76 sloc) 1.63 KB
             <input type="button" id="add-to-schedule" value="send" v-on:click="addToSchedule()">
 
         </div>
+         </div>
 </template>
 
 
 <script>
+
 export default {
 
 
- 
+
   data: {
     date: null,
     startTime: null,

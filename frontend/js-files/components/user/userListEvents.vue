@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="notification is-danger ">
+      <Schema>  </Schema>
+        <!-- <div class="notification is-danger ">
         <div class="field is-horizontal">
           <div class="field-label">
             <label class="title is-white">Vecka 11:</label>
@@ -79,17 +80,16 @@
 </div>
 <a class="button is-small is-primary">Add Event</a>
 </article>
-</div>
+</div> -->
 
 </div>
-
 </template>
 <script>
-    export default{
-        data(){
-          return{
-            msg: 'this is user home pagesssssssssssss'
-          }
-        }
-    }
+
+import Schema from '../calander.vue'
+export default {
+  components:{
+    Schema
+  }
+}
 </script>
