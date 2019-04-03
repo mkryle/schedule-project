@@ -22,7 +22,7 @@
     </div>
     <div v-else="" class="notification is-danger">
         {{notAdmin}}
-              <button class="button" @click="$router.go(-1)">Go back</button>
+              <button class="button" @click="$router.push('/login')">Go Back to Login Page</button>
     </div>
 </div>
 </template>
