@@ -1,18 +1,16 @@
 import Vue from 'vue'
 var baseServerUrl = 'http://localhost:3000';
+var passwordHash = require('password-hash');
+const saltRounds = 10;
 export default {
   state: {
      students: [],
      studentId: '',
      studentName: '',
      studentCourse: '',
-     admins: [{
-       username:'jon',
-       password: '12345'
-   },{
-     username:'admin',
-     password: 'admin'
-   }],
+     adminUsername: '',
+     adminPassword: '',
+     admins: [],
    tokens: null
   },
   actions:{
@@ -24,13 +22,38 @@ export default {
     // function is to check if username and password is squal with the resquested input
     LOGIN(state,res){
       state.admins.forEach(function(one) {
+        var genhash = passwordHash.generate(state.adminPassword);
+        var hashedPassword = one.password
+        var comparePaswords =  passwordHash.verify(res.password, hashedPassword)
+        // console.log(genhash);
+        console.log('hashedInDB------------>' + hashedPassword);
+        console.log('Compare Input VS hashedInDB------------>' +passwordHash.verify(res.password, hashedPassword))
        if(one.username === res.username){
-           if(one.password === res.password){
+           if(comparePaswords == true){
                state.tokens = 'asjdka7342jukadasdu32474jads'
+                       console.log('Compare Input VS hashedInDB------------>' +passwordHash.verify(res.password, hashedPassword))
            }
        }
 });
 
+},
+registerAdmin(state){
+  const vm = this
+  var hashedPassword = passwordHash.generate(state.adminPassword);
+      console.log(passwordHash.verify('password123', hashedPassword)); // true
+  fetch(baseServerUrl + '/admin/getLogins', {
+  body: JSON.stringify({username: state.adminUsername, password: hashedPassword}),
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  method: 'POST'
+}).then(function (response) {
+  return response.json()
+}).then(function (result) {
+  console.log(result)
+  console.log('New Admin registred')
+})
+  state.admins.push({username: state.adminUsername, password: state.adminPassword});
 },
 addStudent(state) {
   fetch(baseServerUrl + '/admin/getStudents', {
@@ -64,7 +87,6 @@ DELETE_USER(state, index) {
     method: 'DELETE'
   }).then(() => {
               console.log('removed===>>>> ' + index);
-              // self.filterUsers();
               state.students.splice(index, 1)
           })
 },
@@ -78,10 +100,14 @@ EDIT_STUDENT(state, index) {
   }).then(() => {
               console.log('UPDATED ===>>>> ' + index);
               console.log(JSON.stringify(index));
-              // self.filterUsers();
-              // state.students.splice(index, 1)
               Vue.set(state, 'students', index);
           })
+},
+ADMIN_USERNAME(state, payload) {
+  state.adminUsername = payload
+},
+ADMIN_PASSWORD(state, payload) {
+  state.adminPassword = payload
 }
   },
   getters:{
@@ -99,14 +125,15 @@ EDIT_STUDENT(state, index) {
         state.students = result
       })
   return state.students;
-},  getAdmins: state => {
-    fetch(baseServerUrl + '/admin/getAdmins')
+},
+getAdmins: state => {
+    fetch(baseServerUrl + '/admin/getLogins')
       .then(response => response.json())
       .then(result => {
-        state.admins = result
+         state.admins = result
+        // state.admins.push(result)
       })
-
-  return state.admins;
+      return state.admins;
 },
   studentId: state => {
     return state.studentId;
@@ -116,6 +143,12 @@ EDIT_STUDENT(state, index) {
   },
   studentCourse: state => {
     return state.studentCourse;
+  },
+  adminUsername: state => {
+    return state.adminUsername;
+  },
+  adminPassword: state => {
+    return state.adminPassword;
   }
   }
 };
