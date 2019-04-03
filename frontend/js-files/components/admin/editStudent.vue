@@ -5,6 +5,7 @@
     </div>
 <div class="" v-else="" >
     <p>{{msg}} : {{ $route.params.userId }}</p>
+    <p class="notification is-info" v-if="msgEdit.length > 0">{{msgEdit}}</p>
     <p class="control">
       <label class="label" for="username">Student Name</label>
       <input v-model="user.name" class="input" type="text" id="username" placeholder="student Name">
@@ -30,7 +31,8 @@ export default {
         name:null,
         courseid: null
       },
-   msg:'Current Student Id'
+   msg:'Current Student Id',
+   msgEdit: ''
     }
   },
   computed: {
@@ -38,9 +40,10 @@ export default {
  },
   methods: {
     letsEdit(){
-      let id = this.$route.params.userId
-      fetch('http://localhost:7000/admin/getStudents/'+ id, {
-        body: JSON.stringify({ name: this.user.name, courseid: this.user.courseid }),
+      let den = this
+      let id = den.$route.params.userId
+      fetch('http://localhost:3000/admin/getStudents/'+ id, {
+        body: JSON.stringify({ name: den.user.name, courseid: den.user.courseid }),
         headers: {
           'Content-Type': 'application/json'
         },
@@ -50,6 +53,10 @@ export default {
     return response.json()
   })
   .then(function (result) {
+    den.msgEdit = 'Student was updated'
+    setTimeout(function(){
+      den.$router.go(-1)
+   }, 3000)
     console.log(result)
   })
          // return this.$store.getters['getSingleStudent'](this.$route.params);
