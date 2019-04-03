@@ -1,12 +1,13 @@
 <template>
   <div class="hero">
-
-
+    <p class="control">
     <p v-if="errors.length">
    <b>Please correct the following error(s):</b>
-   <ul>
-     <li v-for="error in errors">{{ error }}</li>
-   </ul>
+     <p class="notification is-warning" v-for="error in errors">{{ error }}</p>
+ </p>
+   <p class="notification is-success" v-if="studentAdedde.length > 0">
+     {{ studentAdedde }}
+   </p>
  </p>
 <div class="field is-grouped">
   <p class="control">
@@ -26,7 +27,8 @@ export default {
   name: 'AddNewStudent',
   data(){
     return{
-      errors: []
+      errors: [],
+      studentAdedde: ''
     }
   },
   computed: {
@@ -49,12 +51,24 @@ export default {
   },
   methods: {
     addStudent() {
-      if (this.STUDENT_NAME.length > 0 && this.STUDENT_COURSE.length > 0) {
-        this.$store.commit('addStudent')
+      var den = this
+      if (den.STUDENT_NAME.length > 0 && den.STUDENT_COURSE.length > 0) {
+        den.$store.commit('addStudent')
+        den.studentAdedde = 'New Student Successfully added'
+        setTimeout(function(){
+          console.log('sho after 3 sec');
+          console.log(den.studentAdedde);
+          den.studentAdedde = ''
+       }, 2000)
         return true;
       }else {
-        this.errors.push('Name & Course field are required');
+        den.errors.push('Name & Course field are required');
       }
+      setTimeout(function(){
+        console.log('Clear error notifications');
+        den.studentAdedde = ''
+        return den.errors = []
+     }, 2000)
     }
   }
 }
