@@ -2,6 +2,10 @@
     <div class="hero is-large is-light" >
   <!-- List records -->
   <div class="container is-centered">
+    <p class="notification is-danger" v-if="studentRemoved.length > 0">
+      {{ studentRemoved }}
+    </p>
+
       <addForm></addForm>
 
   <table class="table is-bordered is-striped">
@@ -38,7 +42,7 @@ import addForm from './addNewStudent.vue'
     export default{
       data(){
         return{
-
+          studentRemoved: ''
         }
       },
       computed: {
@@ -48,7 +52,14 @@ import addForm from './addNewStudent.vue'
       },
       methods: {
       deleteStudent(index) { // tabort en record från store
-          this.$store.commit('DELETE_USER', index)
+        var den = this
+          den.$store.commit('DELETE_USER', index)
+          den.studentRemoved = 'Student with ID: ' + index + ' was Removed'
+          setTimeout(function(){
+            console.log('sho after 3 sec');
+            console.log(den.studentRemoved);
+            den.studentRemoved = ''
+         }, 3000)
       }
       },
       components:{
