@@ -40,9 +40,9 @@ routerLogin.post('/admin/getLogins', (req, res) => {
     }) //db close
 })
 
-routerLogin.put('/admin/getLogins/:id', (req, res) => {
-    database.run('UPDATE admins SET username=?, password=? WHERE id=?;',
-        [req.body.username, req.body.password, req.params.id]
+routerLogin.put('/admin/getLogins/:username', (req, res) => {
+    database.run('UPDATE admins SET username=?, password=? WHERE username=?;',
+        [req.body.username, req.body.password, req.params.username]
     ).then(() => {
         database.all('SELECT * FROM admins').then(result => {
             res.send(result)

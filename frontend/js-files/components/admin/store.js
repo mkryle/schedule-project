@@ -16,7 +16,7 @@ export default {
   actions:{
     login (state,admin) {
     state.commit('LOGIN',admin)
-    }
+  },
 },
   mutations: {
     // function is to check if username and password is squal with the resquested input

@@ -61,8 +61,17 @@
     export default{
         data(){
           return{
-            msgHeader: 'Ändra dina inloggningsuppgifter:'
+            admin: {
+              username:null,
+              password: null
+            },
+         msg:'Current Student Id',
+         msgEdit: '',
+         msgHeader: 'Ändra dina inloggningsuppgifter:'
           }
+        },
+        methods:{
+
         }
     }
 </script>
