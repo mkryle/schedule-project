@@ -3,8 +3,9 @@
 
     <div class="tabs is-centered">
       <ul>
-        <li v-bind:class="{ 'is-active': tabsel == 'login' }" @click="tabsel = 'login'"><a>Login</a></li>
-        <li v-bind:class="{ 'is-active': tabsel == 'register' }" @click="tabsel = 'register'"><a>Register</a></li>
+        <li v-bind:class="{ 'is-active': tabID == 'login' }" @click="tabID = 'login'"><a>Login</a></li>
+        <li v-bind:class="{ 'is-active': tabID == 'register' }" @click="tabID = 'register'"><a>Register</a></li>
+        <li v-bind:class="{ 'is-active': tabID == 'findSchema' }" @click="tabID = 'findSchema'"><a>Students Schedule</a></li>
       </ul>
     </div>
   <section class="hero is-fullheight is-dark is-bold">
@@ -14,7 +15,7 @@
       <div class="container">
 
       <div class="content">
-        <div v-show="tabsel == 'login'">
+        <div v-show="tabID == 'login'">
           <div class="columns is-centered">
             <div class="card is-rounded">
               <div class="card-content">
@@ -66,7 +67,7 @@
           </div>
         </div>
 
-        <div v-show="tabsel == 'register'">
+        <div v-show="tabID == 'register'">
           <div class="columns is-centered">
             <div class="card is-rounded">
           <div class="card-content">
@@ -124,17 +125,49 @@
           </div>
           </div>
           </div>
+        </div>
+      <div v-show="tabID == 'findSchema'">
+        <div class="columns is-centered">
+          <div class="card is-rounded">
+            <div class="card-content">
+              <h1 class="title">
+                <img src="../../assets/logo.png" alt="logo" width="220">
+              </h1>
+              <p v-if="errors.length">
+             <b>Please correct the following error(s):</b>
 
+               <p id="hideNoti" v-for="error in errors" class="notification is-warning">
+                 {{ error }}
+               </p>
 
+           </p>
+           <p class="notification is-success"v-if="founded.length">{{founded}}</p>
+              <p class="control has-icon">
+                <input
+                  class="input"
+                  id="name"
+                  type="text"
+                  placeholder="First Name"
+                  v-model="studentName"
+                >
+                <i class="fa fa-user"></i>
+              </p>
+              <p class="control">
+                <button
+                  class="button is-small is-outlined is-fullwidth"
+                  v-on:click="findStudent()"
+                >Login</button>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-
-
+      </div>
       </div>
     </div>
     <section>
   <div class="" v-for="admin in admins">
-    {{admin}}
+
   </div>
     </section>
   </section>
@@ -148,14 +181,16 @@ var baseServerUrl = 'http://localhost:3000';
   export default {
     data(){
       return {
-        tabsel: 'login',
+        tabID: 'login',
         found: false,
+        founded: '',
         msg: '',
         check: '',
         admin :{
             username:'',
             password:''
         },
+        studentName: null,
         errors: [],
         allAdmins: [],
         passwordRepeat: ''
@@ -178,6 +213,9 @@ var baseServerUrl = 'http://localhost:3000';
                   //     return den.allAdmins
                   // }
                },
+               students() { // hämtar allt from store
+                return this.$store.getters.loadAll.find((p) => p.name == this.studentName) || {}
+                  },
         adminUsername: {
                  get() {
                    return this.$store.getters.adminUsername
@@ -196,6 +234,21 @@ var baseServerUrl = 'http://localhost:3000';
                }
           },
     methods:{
+      findStudent(){
+        let den = this
+          if (den.studentName == den.students.name) {
+             den.founded = 'Student founded, you will be redirected in 3 seconds'
+             setTimeout(function(){
+               den.$router.push('/user/'+ den.studentName+'/events')
+            }, 3000)
+          }else {
+            den.errors.push('Student Not Found');
+            setTimeout(function(){
+              console.log('Clear error notifications');
+              return den.errors = []
+           }, 3000)
+          }
+      },
       submitLogin(){
      const den = this;
      den.$store.dispatch('login',den.admin).then(function(){
