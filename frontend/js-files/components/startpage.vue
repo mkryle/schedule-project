@@ -132,12 +132,13 @@
 
       </div>
     </div>
+    <section>
+  <div class="" v-for="admin in admins">
+    {{admin}}
+  </div>
+    </section>
   </section>
-  <section>
-<div class="" v-for="item in admins">
-  {{item}}
-</div>
-  </section>
+
     </div>
 </template>
 
@@ -163,15 +164,19 @@ var baseServerUrl = 'http://localhost:3000';
     computed: {
         admins() { // hämtar allt from store
                     // this.allAdmins.push(this.$store.getters.getAdmins)
-                    this.allAdmins = this.$store.getters.getAdmins
+                    // let den = this
+                    // den.allAdmins =
+
+                    return this.$store.getters.getAdmins
 
                     // var found = false
-                    for (var i = 0; i < this.allAdmins.length; i++) {
-                      if (this.allAdmins[i].username == this.adminUsername) {
-                        return this.found = true
-                      }
-                  }
-                   return this.allAdmins
+                  //   for (var i = 0; i < den.allAdmins.length; i++) {
+                  //     if (den.allAdmins[i].username == den.adminUsername) {
+                  //       console.log('find it');
+                  //       return den.found = true
+                  //     }
+                  //     return den.allAdmins
+                  // }
                },
         adminUsername: {
                  get() {
@@ -213,6 +218,15 @@ var baseServerUrl = 'http://localhost:3000';
    },
    submitRegister(){
      const vm = this
+     console.log(vm.admins.length);
+     // for loop to find the username if already exists in out database
+       for (var i = 0; i < vm.admins.length; i++) {
+         if (vm.admins[i].username == vm.adminUsername) {
+           console.log('found it');
+            vm.found = true
+            console.log(vm.admins[i].username);
+         }
+     }
      if (vm.adminUsername.length > 0 && vm.adminPassword.length > 6) {
          if (vm.found == false) {
            if(vm.adminPassword === vm.passwordRepeat) {
