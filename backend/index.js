@@ -1,6 +1,7 @@
 const express = require('express')
 const studentsAPI = require('./studentsAPI')
 const schemaAPI = require('./schemaAPI')
+const loginAPI = require('./loginAPI')
 const path = require('path')
 var cors = require('cors')
 var bodyParser = require("body-parser");
@@ -13,6 +14,7 @@ app.use(cors())
 
 app.use(studentsAPI);
 app.use(schemaAPI);
+app.use(loginAPI);
 
 
 
