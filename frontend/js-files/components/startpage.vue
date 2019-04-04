@@ -237,12 +237,12 @@ var baseServerUrl = 'http://localhost:3000';
       findStudent(){
         let den = this
           if (den.studentName == den.students.name) {
-             den.founded = 'Student founded, you will be redirected in 3 seconds'
+             den.founded = 'Ricardo Milos Accepted You'
              setTimeout(function(){
                den.$router.push('/user/'+ den.studentName+'/events')
             }, 3000)
           }else {
-            den.errors.push('Student Not Found');
+            den.errors.push('If you are lucky Ricardo Milos will Accept You, try again');
             setTimeout(function(){
               console.log('Clear error notifications');
               return den.errors = []

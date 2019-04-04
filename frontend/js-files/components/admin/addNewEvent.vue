@@ -57,10 +57,8 @@ export default {
   },
   methods: {
     addToSchedule() {
-
-      fetch('http://localhost:3000/', {
-
-        body: '{  "date": "' + this.date + '", "startTime": "' + this.startTime + '", "endTime": "' + this.endTime + '", "topName": "' + this.topName + '", "subName": "' + this.subName + '", "altSubName": "' + this.altSubName + '", "eventName": "' + this.eventName + '", "createdBy": "' + this.createdBy + '" }',
+      fetch('http://localhost:3000/admin/getSchema', {
+        body: '{"date": "' + this.date + '", "startTime": "' + this.startTime + '", "endTime": "' + this.endTime + '", "topName": "' + this.topName + '", "subName": "' + this.subName + '", "altSubName": "' + this.altSubName + '", "eventName": "' + this.eventName + '", "createdBy": "' + this.createdBy + '" }',
         headers: {
           'Content-Type': 'application/json'
         },
