@@ -1,3 +1,6 @@
+#
+# See "complete.jpeg" for picture of project running!
+#
 # Grupp Arbete
 
 > Schedule Project using Vue + SQLITE3 + express
