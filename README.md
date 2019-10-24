@@ -1,4 +1,6 @@
 #
+# done (finished)
+#
 # See "complete.jpeg" for picture of project running!
 #
 # Grupp Arbete
